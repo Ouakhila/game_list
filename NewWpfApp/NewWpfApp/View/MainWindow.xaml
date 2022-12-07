@@ -1,0 +1,174 @@
+﻿<Window x:Class="NewWpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NewWpfApp" 
+        xmlns:model="clr-namespace:NewWpfApp.Model" d:DataContext="{d:DesignInstance Type=model:GameRecord}"
+        mc:Ignorable="d"
+      
+    Title="Create And Delete Games"
+        Height="900" Width="800"
+         Background="Transparent">
+    <Border>
+
+        <Border.BorderBrush>
+            <LinearGradientBrush>
+                <GradientStop Color="Orange" Offset="0"/>
+                <GradientStop Color="Red" Offset="1"/>
+
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+
+        <Border.Background>
+            <LinearGradientBrush>
+                <GradientStop Color="DarkViolet" Offset="0"/>
+                <GradientStop Color="PaleVioletRed" Offset="0.75"/>
+
+            </LinearGradientBrush>
+        </Border.Background>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="500"/>
+                <RowDefinition Height="500"/>
+               
+            </Grid.RowDefinitions>
+            <StackPanel>
+                <TextBlock Text="List Your Favourite Game"
+                           FontSize="45"
+                             FontWeight="Medium"
+                               FontFamily="Montserrat"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"
+                               Margin="0,5,0,0"/>
+
+            </StackPanel>
+            <StackPanel Grid.Row="0"
+                        Height="400">
+                <Image Source="/Images/GameImg.jpg"
+                           Width="800" Height="600"
+                            Margin="0,20,0,0"/>
+            </StackPanel>  
+        
+        <StackPanel Orientation="Horizontal"
+                    Grid.Row="2">
+                <StackPanel>
+                    <GroupBox Header="Add Your Favourite Game" Margin="2" Height="200" Width="350">
+                        <Grid Height="150">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Game Title" HorizontalAlignment="Left" 
+                       VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="0"/>
+                            <TextBox Grid.Row="0" Grid.Column="1" x:Name="GameName" Height="27" 
+                       Text="{Binding Path=GameRecord.GameName, Mode=TwoWay}"  Margin="5"  Width="300" HorizontalAlignment="Left"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="1" x:Name="TextBlockId" 
+                       Visibility="Hidden" Text="{Binding Path=GameRecord.Id, Mode=TwoWay}"/>
+                            <Label Content="GameDescription" HorizontalAlignment="Left" VerticalContentAlignment="Center" 
+                       Grid.Row="2" Grid.Column="0" />
+                            <TextBox Grid.Row="2" Grid.Column="1" x:Name="TextBoxGameDesc" Height="27" 
+                       Text="{Binding Path=GameRecord.GameDescription, Mode=TwoWay}" Margin="5" Width="300" HorizontalAlignment="Left"/>
+
+                        </Grid>
+
+                    </GroupBox>
+
+                    <StackPanel Height="80" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button x:Name="ButtonSave" Content="Save" Height="30" Width="80"
+                    Command="{Binding SaveCommand}">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="DarkViolet"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="DarkOrange"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="80" Height="30"
+                                        CornerRadius="10"
+                                        Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+
+                        <Button x:Name="ButtonCancel" Content="Cancel" Height="30" Width="80" 
+                    Command="{Binding ResetCommand}" Margin="5,0,10,0">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Background" Value="DarkRed"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="DarkOrange"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Width="80" Height="30"
+                                        CornerRadius="10"
+                                        Background="{TemplateBinding Background}">
+                                        <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Button.Template>
+
+                        </Button>
+                    </StackPanel>
+
+                </StackPanel>
+
+                <StackPanel>
+                    <StackPanel Height="210" Width="450">
+                        <DataGrid x:Name="DataGridGames" AutoGenerateColumns="False" 
+                      ItemsSource="{Binding GamesRecord}" CanUserAddRows="False" Height="200" Margin="10">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="GameName" Binding="{Binding Path=Id}" Visibility="Hidden"/>
+                                <DataGridTextColumn Header="GameName" Binding="{Binding Path=GameName}" Width="100"  IsReadOnly="True"/>
+
+
+                                <DataGridTextColumn Header="GameDescription" Binding="{Binding Path=GameDescription}" Width="230" IsReadOnly="True"/>
+                                <DataGridTemplateColumn Width="50">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="Select" x:Name="ButtonEdit" CommandParameter="{Binding Path=Id}"
+                                        Command="{Binding Path=DataContext.EditCommand,RelativeSource={RelativeSource FindAncestor,
+                                                AncestorType=Window}}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTemplateColumn Width="50">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="Delete" x:Name="ButtonDelete" CommandParameter="{Binding Path=Id}"
+                                        Command="{Binding Path=DataContext.DeleteCommand, RelativeSource={RelativeSource FindAncestor,
+                                                AncestorType=Window}}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </StackPanel>
+
+                </StackPanel>
+           
+    </StackPanel>
+
+        </Grid>
+    </Border>
+</Window>

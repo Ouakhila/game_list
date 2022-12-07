@@ -1,0 +1,96 @@
+﻿<Page x:Class="NewWpfApp.View.PageView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:NewWpfApp.View"
+      mc:Ignorable="d" 
+     
+       Title="PageView" Height="700" Width="1000"
+        Background="Transparent">
+
+
+    <Border CornerRadius="20">
+
+        <Border.BorderBrush>
+            <LinearGradientBrush>
+                <GradientStop Color="Orange" Offset="0"/>
+                <GradientStop Color="Red" Offset="1"/>
+
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+
+        <Border.Background>
+            <LinearGradientBrush>
+                <GradientStop Color="DarkViolet" Offset="0"/>
+                <GradientStop Color="PaleVioletRed" Offset="0.75"/>
+
+            </LinearGradientBrush>
+        </Border.Background>
+
+
+
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height= "auto"/>
+                <RowDefinition Height= "auto"/>
+                <RowDefinition Height= "auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.Row="0"
+                FontSize="16"
+                Text="hey there"/>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    
+                </Grid.ColumnDefinitions>
+
+                <TextBlock 
+                    Grid.Column="0"
+                    FontWeight="Bold"
+                    Text="Is your favourite game?">
+                    
+                    <TextBlock Grid.Column="1" Text="Yes"/>
+                    
+                    
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+
+                </Grid.ColumnDefinitions>
+
+                <TextBlock 
+                    Grid.Column="0"
+                    FontWeight="Bold"
+                    Text="Is your favourite game?">
+                    
+                    <TextBlock Grid.Column="1" Text="Yes"/>
+                    
+                    
+                </TextBlock>
+            </Grid>
+
+        </Grid>
+
+
+          
+
+            
+            
+
+
+     
+
+    </Border>
+
+
+</Page>
