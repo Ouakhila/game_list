@@ -5,6 +5,7 @@ This is a WPF project that perform CRUD (Create, Read, Update, Delete) operation
 
 
 ## tool used 
+- MVVM
 - XAML
 - C#
 - SQL 
